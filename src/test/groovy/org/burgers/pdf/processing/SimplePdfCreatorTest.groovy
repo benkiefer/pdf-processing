@@ -1,9 +1,6 @@
 package org.burgers.pdf.processing;
 
 import org.junit.Test
-import de.oio.jpdfunit.DocumentTestCase
-import de.oio.jpdfunit.document.util.DocumentDataSource
-import de.oio.jpdfunit.document.util.PdfDataSource
 import de.oio.jpdfunit.DocumentTester
 import de.oio.jpdfunit.document.util.TextSearchType
 import org.junit.Before
@@ -14,7 +11,7 @@ class SimplePdfCreatorTest {
     File file
 
     @Before
-    void setUp(){
+    void setUp() {
         file = File.createTempFile("test", ".pdf")
     }
 
@@ -27,7 +24,7 @@ class SimplePdfCreatorTest {
     }
 
     @After
-    void tearDown(){
+    void tearDown() {
         file.delete()
     }
 }
