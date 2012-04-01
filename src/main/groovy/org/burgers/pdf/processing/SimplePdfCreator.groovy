@@ -8,6 +8,7 @@ import com.lowagie.text.FontFactory
 import com.lowagie.text.Font
 import java.awt.Color
 import com.lowagie.text.Document
+import com.lowagie.text.pdf.PdfPage
 
 class SimplePdfCreator {
     void createFrom(String path) {
@@ -21,6 +22,5 @@ class SimplePdfCreator {
         } catch (Exception e) {
             e.printStackTrace()
         }
-
     }
 }
