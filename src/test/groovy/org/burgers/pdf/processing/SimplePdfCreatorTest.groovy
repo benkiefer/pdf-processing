@@ -42,11 +42,12 @@ class SimplePdfCreatorTest {
     void createFrom_using_pdf_box_to_extract_text_targeted_extraction(){
         new SimplePdfCreator().createFrom(file.absolutePath)
         def doc = PDDocument.load(file.absolutePath)
-        Rectangle2D.Double d = new Rectangle2D.Double(0, 0, 9999, 9999)
+        Rectangle2D.Double d = new Rectangle2D.Double(0, 0, 120, 100)
         def stripper = new PDFTextStripperByArea()
         def pages = doc.getDocumentCatalog().allPages
         stripper.addRegion("myRegion", d)
         stripper.extractRegions(pages[0])
+        println stripper.getTextForRegion("myRegion")
         assert stripper.getTextForRegion("myRegion").contains("This is a test.")
     }
 
