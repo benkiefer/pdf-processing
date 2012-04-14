@@ -8,6 +8,7 @@ import org.apache.pdfbox.util.PDFTextStripperByArea
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
+import static org.burgers.pdf.processing.PdfContentAssertion.*
 
 class SimplePdfCreatorTest {
     File file
@@ -22,32 +23,24 @@ class SimplePdfCreatorTest {
     void createFrom_using_pdf_box_to_extract_text() {
         new SimplePdfCreator().createFrom(file.absolutePath)
         doc = PDDocument.load(file.absolutePath)
-        assert doc.documentCatalog.allPages.size() == 1
-        assert new PDFTextStripper().getText(doc).contains("This is a test.")
+        assertDocumentContains(doc, "This is a test.")
+        assertNumberOfPages(doc, 1)
     }
 
     @Test
     void createFrom_precise_region_extraction() {
         new SimplePdfCreator().createFrom(file.absolutePath)
         doc = PDDocument.load(file.absolutePath)
-        Rectangle2D.Double d = new Rectangle2D.Double(100, 90, 80, 5)
-        def stripper = new PDFTextStripperByArea()
         def pages = doc.getDocumentCatalog().allPages
-        stripper.addRegion("myRegion", d)
-        stripper.extractRegions(pages[0])
-        assert stripper.getTextForRegion("myRegion").contains("This is a test.")
+        assertPageContainsAt(pages[0], "This is a test.", 100, 90, 80, 5)
     }
 
     @Test
     void createFrom_big_region_extraction() {
         new SimplePdfCreator().createFrom(file.absolutePath)
         doc = PDDocument.load(file.absolutePath)
-        Rectangle2D.Double d = new Rectangle2D.Double(0, 0, 500, 500)
-        def stripper = new PDFTextStripperByArea()
         def pages = doc.getDocumentCatalog().allPages
-        stripper.addRegion("myRegion", d)
-        stripper.extractRegions(pages[0])
-        assert stripper.getTextForRegion("myRegion").contains("This is a test.")
+        assertPageContainsAt(pages[0], "This is a test.", 0, 0, 500, 500)
     }
 
     @After
