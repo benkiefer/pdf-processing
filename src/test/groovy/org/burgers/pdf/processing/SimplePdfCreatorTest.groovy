@@ -11,6 +11,7 @@ import org.junit.Test
 
 class SimplePdfCreatorTest {
     File file
+    PDDocument doc
 
     @Before
     void setUp() {
@@ -20,7 +21,7 @@ class SimplePdfCreatorTest {
     @Test
     void createFrom_using_pdf_box_to_extract_text() {
         new SimplePdfCreator().createFrom(file.absolutePath)
-        def doc = PDDocument.load(file.absolutePath)
+        doc = PDDocument.load(file.absolutePath)
         assert doc.documentCatalog.allPages.size() == 1
         assert new PDFTextStripper().getText(doc).contains("This is a test.")
     }
@@ -28,8 +29,8 @@ class SimplePdfCreatorTest {
     @Test
     void createFrom_precise_region_extraction() {
         new SimplePdfCreator().createFrom(file.absolutePath)
-        def doc = PDDocument.load(file.absolutePath)
-        Rectangle2D.Double d = new Rectangle2D.Double(35, 52, 120, 3)
+        doc = PDDocument.load(file.absolutePath)
+        Rectangle2D.Double d = new Rectangle2D.Double(100, 90, 80, 5)
         def stripper = new PDFTextStripperByArea()
         def pages = doc.getDocumentCatalog().allPages
         stripper.addRegion("myRegion", d)
@@ -40,8 +41,8 @@ class SimplePdfCreatorTest {
     @Test
     void createFrom_big_region_extraction() {
         new SimplePdfCreator().createFrom(file.absolutePath)
-        def doc = PDDocument.load(file.absolutePath)
-        Rectangle2D.Double d = new Rectangle2D.Double(0, 0, 120, 100)
+        doc = PDDocument.load(file.absolutePath)
+        Rectangle2D.Double d = new Rectangle2D.Double(0, 0, 500, 500)
         def stripper = new PDFTextStripperByArea()
         def pages = doc.getDocumentCatalog().allPages
         stripper.addRegion("myRegion", d)
@@ -51,6 +52,7 @@ class SimplePdfCreatorTest {
 
     @After
     void tearDown() {
+        if (doc != null) doc.close()
         file.delete()
     }
 }
