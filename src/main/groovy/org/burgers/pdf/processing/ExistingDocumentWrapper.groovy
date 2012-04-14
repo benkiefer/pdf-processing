@@ -2,22 +2,28 @@ package org.burgers.pdf.processing
 
 import org.apache.pdfbox.pdmodel.PDDocument
 import org.apache.pdfbox.pdmodel.PDPage
+import org.apache.pdfbox.pdmodel.font.PDFont
+import org.apache.pdfbox.pdmodel.font.PDTrueTypeFont
 
-class DocumentWrapper {
+class ExistingDocumentWrapper {
     File file
     PDDocument document
 
-    DocumentWrapper(File file){
+    ExistingDocumentWrapper(File file){
         this.file = file
-        try {
-            loadAnExistingDocument(file)
-        } catch (e){
-            e.printStackTrace()
-        }
+        loadAnExistingDocument(file)
+    }
+
+    PDFont loadFont(ttfFontFilePath){
+        PDTrueTypeFont.loadTTF(document, ttfFontFilePath)
     }
 
     PDPage getPage(Integer zeroBasedPageNumber){
         document.documentCatalog.allPages[zeroBasedPageNumber]
+    }
+
+    Integer numberOfPages(){
+        document.documentCatalog.allPages.size()
     }
 
     private loadAnExistingDocument(File file){
