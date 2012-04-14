@@ -1,8 +1,6 @@
 package org.burgers.pdf.processing;
 
 
-import de.oio.jpdfunit.DocumentTester
-import de.oio.jpdfunit.document.util.TextSearchType
 import java.awt.geom.Rectangle2D
 import org.apache.pdfbox.pdmodel.PDDocument
 import org.apache.pdfbox.util.PDFTextStripper
@@ -12,7 +10,6 @@ import org.junit.Before
 import org.junit.Test
 
 class SimplePdfCreatorTest {
-    DocumentTester tester
     File file
 
     @Before
@@ -21,17 +18,10 @@ class SimplePdfCreatorTest {
     }
 
     @Test
-    void test_createFrom() {
-        new SimplePdfCreator().createFrom(file.absolutePath)
-        tester = new DocumentTester(file.absolutePath)
-        tester.assertContentContainsText("This is a test.", TextSearchType.CONTAINS)
-        tester.assertPageCountEquals(1)
-    }
-
-    @Test
     void createFrom_using_pdf_box_to_extract_text() {
         new SimplePdfCreator().createFrom(file.absolutePath)
         def doc = PDDocument.load(file.absolutePath)
+        assert doc.documentCatalog.allPages.size() == 1
         assert new PDFTextStripper().getText(doc).contains("This is a test.")
     }
 

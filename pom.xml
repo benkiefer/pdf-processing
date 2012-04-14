@@ -17,15 +17,15 @@
     <dependencies>
 
         <dependency>
-            <groupId>net.sf.jpdfunit</groupId>
-            <artifactId>jpdfunit</artifactId>
-            <version>1.2</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>
             <version>${groovyAll.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+            <version>1.6.0</version>
         </dependency>
 
         <dependency>
@@ -44,6 +44,12 @@
             <groupId>com.lowagie</groupId>
             <artifactId>itext</artifactId>
             <version>2.1.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.2</version>
         </dependency>
 
 
@@ -70,10 +76,10 @@
     </build>
 
     <!--<repositories>-->
-        <!--<repository>-->
-            <!--<id>jpdfunit-repo</id>-->
-            <!--<url>http://jpdfunit.sourceforge.net/repo</url>-->
-        <!--</repository>-->
+    <!--<repository>-->
+    <!--<id>jpdfunit-repo</id>-->
+    <!--<url>http://jpdfunit.sourceforge.net/repo</url>-->
+    <!--</repository>-->
     <!--</repositories>-->
 
 </project>
