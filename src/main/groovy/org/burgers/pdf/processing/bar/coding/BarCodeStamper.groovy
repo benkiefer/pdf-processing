@@ -5,12 +5,13 @@ import org.apache.pdfbox.pdmodel.PDPage
 import org.apache.pdfbox.pdmodel.edit.PDPageContentStream
 import org.burgers.pdf.processing.ExistingDocumentWrapper
 import org.apache.pdfbox.pdmodel.font.PDFont
+import org.burgers.pdf.processing.PageWrapper
 
 class BarCodeStamper {
     BarCodeValueGenerator generator = new BarCodeValueGenerator()
 
     void stamp(File file, Integer zeroBasedPageNumber, String barCode) {
-        barCode = generator.generate(barCode)
+        barCode = generator.generate(barCode, true)
 
         def wrapper = new ExistingDocumentWrapper(file)
 
@@ -18,16 +19,7 @@ class BarCodeStamper {
 
         PDDocument document = wrapper.document
 
-        PDPage page = wrapper.getPage(zeroBasedPageNumber).page
-
-        PDPageContentStream contentStream = new PDPageContentStream(document, page, true, false)
-
-        contentStream.beginText()
-        contentStream.setFont(font, 30)
-        contentStream.moveTextPositionByAmount(200, 700)
-        contentStream.drawString(barCode)
-        contentStream.endText()
-        contentStream.close()
+        wrapper.getPage(zeroBasedPageNumber).writeText(document, font, 30, 200, 700, barCode)
 
         document.save(file.absolutePath)
         document.close()
