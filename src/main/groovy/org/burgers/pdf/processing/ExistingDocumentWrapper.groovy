@@ -18,8 +18,8 @@ class ExistingDocumentWrapper {
         PDTrueTypeFont.loadTTF(document, ttfFontFilePath)
     }
 
-    PDPage getPage(Integer zeroBasedPageNumber){
-        document.documentCatalog.allPages[zeroBasedPageNumber]
+    PageWrapper getPage(Integer zeroBasedPageNumber){
+        new PageWrapper(document.documentCatalog.allPages[zeroBasedPageNumber])
     }
 
     Integer numberOfPages(){

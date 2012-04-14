@@ -69,11 +69,4 @@
         </plugins>
     </build>
 
-    <!--<repositories>-->
-    <!--<repository>-->
-    <!--<id>jpdfunit-repo</id>-->
-    <!--<url>http://jpdfunit.sourceforge.net/repo</url>-->
-    <!--</repository>-->
-    <!--</repositories>-->
-
 </project>

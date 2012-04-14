@@ -5,6 +5,8 @@ import org.junit.Before
 import org.junit.After
 
 import static org.burgers.pdf.processing.PdfContentAssertion.*
+import org.apache.pdfbox.util.PDFStreamEngine
+import org.apache.pdfbox.pdmodel.PDDocument
 
 public class ExistingDocumentWrapperTest {
     ExistingDocumentWrapper wrapper
@@ -19,7 +21,7 @@ public class ExistingDocumentWrapperTest {
 
     @Test
     void getPage(){
-        assertPageContains(wrapper.getPage(0), "This is a test")
+        assertPageContains(wrapper.getPage(0).page, "This is a test")
     }
 
     @Test
