@@ -11,8 +11,8 @@
     <packaging>pom</packaging>
 
     <properties>
-        <groovyAll.version>1.7.5</groovyAll.version>
-        <gmaven.version>1.2</gmaven.version>
+        <groovy.version>1.8.6</groovy.version>
+        <gmaven.version>1.3</gmaven.version>
     </properties>
 
     <dependencyManagement>
@@ -22,7 +22,7 @@
             <dependency>
                 <groupId>org.codehaus.groovy</groupId>
                 <artifactId>groovy-all</artifactId>
-                <version>${groovyAll.version}</version>
+                <version>${groovy.version}</version>
             </dependency>
 
             <dependency>
@@ -37,8 +37,8 @@
                 <version>${gmaven.version}</version>
                 <exclusions>
                     <exclusion>
-                        <artifactId>org.codehaus.groovy</artifactId>
-                        <groupId>groovy-all</groupId>
+                        <groupId>org.codehaus.groovy</groupId>
+                        <artifactId>groovy-all</artifactId>
                     </exclusion>
                 </exclusions>
             </dependency>
@@ -59,8 +59,18 @@
                 <groupId>org.codehaus.gmaven</groupId>
                 <artifactId>gmaven-plugin</artifactId>
                 <version>${gmaven.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.codehaus.groovy</groupId>
+                        <artifactId>groovy-all</artifactId>
+                        <version>${groovy.version}</version>
+                    </dependency>
+                </dependencies>
                 <executions>
                     <execution>
+                        <configuration>
+                            <providerSelection>1.7</providerSelection>
+                        </configuration>
                         <goals>
                             <goal>compile</goal>
                             <goal>testCompile</goal>

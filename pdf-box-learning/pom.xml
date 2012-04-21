@@ -31,12 +31,6 @@
             <groupId>org.codehaus.gmaven.runtime</groupId>
             <artifactId>gmaven-runtime-1.7</artifactId>
             <version>${gmaven.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>org.codehaus.groovy</artifactId>
-                    <groupId>groovy-all</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>
