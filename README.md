@@ -9,4 +9,4 @@ Technologies used:
  - Pdf Box
  - Maven
 
-[![Build Status](https://secure.travis-ci.org/kingOburgers/database-learning.png?branch=master)](http://travis-ci.org/kingOburgers/database-learning)
+[![Build Status](https://secure.travis-ci.org/kingOburgers/pdf-processing.png?branch=master)](http://travis-ci.org/kingOburgers/pdf-processing)
